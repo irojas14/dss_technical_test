@@ -22,7 +22,7 @@ import { RouterView } from 'vue-router'
       </v-container>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="main-content">
       <RouterView />
     </v-main>
   </v-app>
@@ -31,5 +31,11 @@ import { RouterView } from 'vue-router'
 <style scoped>
 .v-btn {
   text-transform: none;
+}
+
+.main-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
 }
 </style>

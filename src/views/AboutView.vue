@@ -142,7 +142,7 @@
 .about-header-card {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 16px;
+  border-radius: 0;
 }
 
 .about-header-card .v-card-title {
@@ -156,25 +156,25 @@
 
 .content-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   border-left: 4px solid #1976d2;
 }
 
 .tech-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   border-left: 4px solid #4caf50;
 }
 
 .features-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   border-left: 4px solid #2196f3;
 }
 
 .footer-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   border-left: 4px solid #ff9800;
 }
 
@@ -185,7 +185,7 @@
 }
 
 .v-card {
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }

@@ -18,9 +18,4 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-}
+/* Eliminamos la regla que centra el contenido y limita el ancho */

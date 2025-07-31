@@ -1,26 +1,23 @@
 <template>
   <v-main class="dashboard-background">
-    <v-container fluid class="dashboard-container">
-      <v-row class="dashboard-row">
-        <v-col cols="12" class="dashboard-col">
-          <!-- Header mejorado -->
-          <v-row class="dashboard-row">
-            <v-col cols="12" class="dashboard-col">
-              <v-card class="mb-6 header-card" elevation="8">
-                <v-card-title class="text-h3 text-center py-6">
-                  <v-icon size="48" class="mr-4" color="primary">mdi-chart-line</v-icon>
-                  Dashboard de Proyectos Ambientales
-                </v-card-title>
-                <v-card-subtitle class="text-h6 text-center pb-4">
-                  Análisis integral de proyectos ambientales en Chile
-                </v-card-subtitle>
-              </v-card>
-            </v-col>
-          </v-row>
+    <!-- Header sin espacios laterales -->
+    <v-card class="header-card" elevation="8">
+      <v-card-title class="text-h3 text-center py-6">
+        <v-icon size="48" class="mr-4" color="primary">mdi-chart-line</v-icon>
+        Dashboard de Proyectos Ambientales
+      </v-card-title>
+      <v-card-subtitle class="text-h6 text-center pb-4">
+        Análisis integral de proyectos ambientales en Chile
+      </v-card-subtitle>
+    </v-card>
+
+    <v-container fluid class="dashboard-container pa-4">
+      <v-row>
+        <v-col cols="12">
 
           <!-- Filtros mejorados -->
-          <v-row class="dashboard-row">
-            <v-col cols="12" class="dashboard-col">
+          <v-row>
+            <v-col cols="12">
               <v-card class="mb-6 filter-card" elevation="4">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="primary">mdi-filter-variant</v-icon>
@@ -59,8 +56,8 @@
           </v-row>
 
           <!-- Dashboard 1: Proyectos ingresados vs aprobados por año -->
-          <v-row class="dashboard-row">
-            <v-col cols="12" class="dashboard-col">
+          <v-row>
+            <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="info">mdi-chart-bar</v-icon>
@@ -74,8 +71,8 @@
           </v-row>
 
           <!-- Dashboard 2: Inversión por año y tipo de proyecto -->
-          <v-row class="dashboard-row">
-            <v-col cols="12" class="dashboard-col">
+          <v-row>
+            <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="success">mdi-currency-usd</v-icon>
@@ -89,12 +86,12 @@
           </v-row>
 
           <!-- Dashboard 3: Tiempo de tramitación -->
-          <v-row class="dashboard-row">
-            <v-col cols="12" class="dashboard-col">
+          <v-row>
+            <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="warning">mdi-clock-outline</v-icon>
-                  Tiempo de Tramitación por Año y Tipo
+                Tiempo de Tramitación por Año y Tipo
                 </v-card-title>
                 <v-card-text class="pt-4">
                   <ProcessingTimeChart :chart-data="processingTimeChartData" />
@@ -104,7 +101,7 @@
           </v-row>
 
           <!-- Resumen de estadísticas -->
-          <v-row class="dashboard-row">
+          <v-row>
             <v-col cols="12" md="3">
               <v-card class="stat-card" elevation="4">
                 <v-card-text class="text-center">
@@ -383,57 +380,18 @@ onMounted(() => {
   width: 100%;
 }
 
-/* Forzar ancho completo */
 .dashboard-container {
-  max-width: none !important;
+  max-width: 100% !important;
   width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.dashboard-row {
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.dashboard-col {
-  padding: 0 !important;
-  width: 100% !important;
-}
-
-/* Override Vuetify defaults */
-.dashboard-container .v-container {
-  max-width: none !important;
-  width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.dashboard-row .v-row {
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.dashboard-col .v-col {
-  padding: 0 !important;
-  width: 100% !important;
-}
-
-/* Forzar ancho completo en toda la aplicación */
-.v-application {
-  width: 100% !important;
-}
-
-.v-main {
-  width: 100% !important;
-  padding: 0 !important;
 }
 
 .header-card {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 16px;
+  border-radius: 0;
   width: 100%;
+  margin: 0;
+  box-shadow: none;
 }
 
 .header-card .v-card-title {
@@ -447,14 +405,14 @@ onMounted(() => {
 
 .filter-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   border-left: 4px solid #1976d2;
   width: 100%;
 }
 
 .chart-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   transition: transform 0.2s ease-in-out;
   width: 100%;
 }
@@ -465,7 +423,7 @@ onMounted(() => {
 
 .stat-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 0;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
   width: 100%;
@@ -477,7 +435,7 @@ onMounted(() => {
 }
 
 .v-card {
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   width: 100%;
@@ -510,5 +468,16 @@ onMounted(() => {
   .stat-card .v-card-text {
     padding: 16px !important;
   }
+}
+
+/* Asegurar que el contenido use todo el ancho disponible */
+.v-main {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.v-container {
+  max-width: 100% !important;
+  width: 100% !important;
 }
 </style> 
