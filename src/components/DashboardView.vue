@@ -15,17 +15,28 @@
       <v-row>
         <v-col cols="12">
 
-          <!-- Filtros mejorados -->
+          <!-- Selector de Dashboard -->
           <v-row>
             <v-col cols="12">
               <v-card class="mb-6 filter-card" elevation="4">
                 <v-card-title class="d-flex align-center">
-                  <v-icon class="mr-3" color="primary">mdi-filter-variant</v-icon>
-                  Filtros de Análisis
+                  <v-icon class="mr-3" color="primary">mdi-view-dashboard</v-icon>
+                  Seleccionar Dashboard
                 </v-card-title>
                 <v-card-text class="pt-4">
                   <v-row>
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="4">
+                      <v-select
+                        v-model="selectedDashboard"
+                        :items="dashboardOptions"
+                        label="Dashboard a Mostrar"
+                        prepend-icon="mdi-chart-line"
+                        variant="outlined"
+                        color="primary"
+                        @update:model-value="changeDashboard"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="4">
                       <v-select
                         v-model="selectedRegion"
                         :items="regions"
@@ -37,7 +48,7 @@
                         @update:model-value="filterData"
                       />
                     </v-col>
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="4">
                       <v-select
                         v-model="selectedYear"
                         :items="years"
@@ -56,7 +67,7 @@
           </v-row>
 
           <!-- Dashboard 1: Proyectos ingresados vs aprobados por año -->
-          <v-row>
+          <v-row v-if="selectedDashboard === 'all' || selectedDashboard === 'projects'">
             <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
@@ -74,7 +85,7 @@
           </v-row>
 
           <!-- Dashboard 2: Inversión por año y tipo de proyecto -->
-          <v-row>
+          <v-row v-if="selectedDashboard === 'all' || selectedDashboard === 'investment'">
             <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
@@ -92,7 +103,7 @@
           </v-row>
 
           <!-- Dashboard 3: Tiempo de tramitación -->
-          <v-row>
+          <v-row v-if="selectedDashboard === 'all' || selectedDashboard === 'processing'">
             <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
@@ -176,6 +187,15 @@ interface Project {
 const projects = ref<Project[]>([])
 const selectedRegion = ref<string>('')
 const selectedYear = ref<string>('')
+const selectedDashboard = ref<string>('all')
+
+// Opciones de dashboard
+const dashboardOptions = [
+  { title: 'Todos los Dashboards', value: 'all' },
+  { title: 'Proyectos Ingresados vs Aprobados', value: 'projects' },
+  { title: 'Inversión por Año y Tipo', value: 'investment' },
+  { title: 'Tiempo de Tramitación', value: 'processing' }
+]
 
 // Datos filtrados
 const filteredProjects = computed(() => {
@@ -369,6 +389,10 @@ const processingTimeChartData = computed(() => {
 // Métodos
 const filterData = () => {
   // Los datos se actualizan automáticamente gracias a computed
+}
+
+const changeDashboard = () => {
+  // El dashboard se actualiza automáticamente gracias a v-if en el template
 }
 
 const loadData = async () => {
