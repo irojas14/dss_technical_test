@@ -1,5 +1,79 @@
 <template>
   <v-main class="dashboard-background">
+    <v-dialog v-model="showDataSelection" persistent max-width="600">
+      <v-card>
+        <v-card-title class="d-flex align-center">
+          <v-icon class="mr-3" color="primary">mdi-database</v-icon>
+          Seleccionar Fuente de Datos
+        </v-card-title>
+        <v-card-text class="pt-4">
+          <p class="text-body-1 mb-4">
+            ¿Qué datos desea utilizar para los dashboards?
+          </p>
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-card 
+                class="data-option-card" 
+                :class="{ 'selected': selectedDataOption === 'default' }"
+                @click="selectDataOption('default')"
+                elevation="2"
+              >
+                <v-card-text class="text-center">
+                  <v-icon size="48" color="primary" class="mb-3">mdi-file-document</v-icon>
+                  <h3 class="text-h6 font-weight-bold mb-2">Datos por Defecto</h3>
+                  <p class="text-body-2 text-grey">
+                    Utilizar el archivo JSON incluido en el proyecto
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-card 
+                class="data-option-card" 
+                :class="{ 'selected': selectedDataOption === 'upload' }"
+                @click="selectDataOption('upload')"
+                elevation="2"
+              >
+                <v-card-text class="text-center">
+                  <v-icon size="48" color="success" class="mb-3">mdi-upload</v-icon>
+                  <h3 class="text-h6 font-weight-bold mb-2">Subir Archivo JSON</h3>
+                  <p class="text-body-2 text-grey">
+                    Cargar un archivo JSON personalizado
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+          
+          <div v-if="selectedDataOption === 'upload'" class="mt-4">
+            <v-file-input
+              v-model="uploadedFile"
+              label="Seleccionar archivo JSON"
+              accept=".json"
+              prepend-icon="mdi-file-json"
+              variant="outlined"
+              color="primary"
+              :rules="[fileRules]"
+              @update:model-value="handleFileUpload"
+            />
+            <p class="text-caption text-grey mt-2">
+              El archivo debe tener el mismo formato que el JSON por defecto
+            </p>
+          </div>
+        </v-card-text>
+        <v-card-actions class="pa-4">
+          <v-spacer />
+          <v-btn 
+            color="primary" 
+            @click="confirmDataSelection"
+            :disabled="selectedDataOption === 'upload' && !uploadedFile"
+          >
+            Continuar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-card class="header-card" elevation="8">
       <v-card-title class="text-h3 text-center py-6">
         <v-icon size="48" class="mr-4" color="primary">mdi-chart-line</v-icon>
@@ -181,6 +255,10 @@ const selectedRegion = ref<string>('')
 const selectedYear = ref<string>('')
 const selectedDashboard = ref<string>('all')
 
+const showDataSelection = ref<boolean>(true)
+const selectedDataOption = ref<string>('')
+const uploadedFile = ref<File | null>(null)
+
 const dashboardOptions = [
   { title: 'Todos los Dashboards', value: 'all' },
   { title: 'Proyectos Ingresados vs Aprobados', value: 'projects' },
@@ -361,10 +439,70 @@ const processingTimeChartData = computed(() => {
   }
 })
 
+const fileRules = (value: File | null) => {
+  if (!value) return 'Debe seleccionar un archivo'
+  if (value.type !== 'application/json') return 'El archivo debe ser JSON'
+  return true
+}
+
 const filterData = () => {
 }
 
 const changeDashboard = () => {
+}
+
+const selectDataOption = (option: string) => {
+  selectedDataOption.value = option
+  if (option === 'default') {
+    uploadedFile.value = null
+  }
+}
+
+const handleFileUpload = (files: File | File[]) => {
+  if (Array.isArray(files)) {
+    uploadedFile.value = files[0] || null
+  } else {
+    uploadedFile.value = files
+  }
+}
+
+const confirmDataSelection = async () => {
+  if (selectedDataOption.value === 'default') {
+    await loadDefaultData()
+  } else if (selectedDataOption.value === 'upload' && uploadedFile.value) {
+    await loadUploadedData()
+  }
+  
+  showDataSelection.value = false
+}
+
+const loadDefaultData = async () => {
+  try {
+    const response = await fetch('/data/proyectos.json')
+    projects.value = await response.json()
+  } catch (error) {
+    console.error('Error cargando datos por defecto:', error)
+    projects.value = []
+  }
+}
+
+const loadUploadedData = async () => {
+  if (!uploadedFile.value) return
+  
+  try {
+    const text = await uploadedFile.value.text()
+    const data = JSON.parse(text)
+    
+    if (Array.isArray(data) && data.length > 0 && data[0].id) {
+      projects.value = data
+    } else {
+      throw new Error('Formato de archivo inválido')
+    }
+  } catch (error) {
+    console.error('Error cargando archivo subido:', error)
+    alert('Error al cargar el archivo. Asegúrese de que tenga el formato correcto.')
+    projects.value = []
+  }
 }
 
 const loadData = async () => {
@@ -378,7 +516,6 @@ const loadData = async () => {
 }
 
 onMounted(() => {
-  loadData()
 })
 </script>
 
@@ -486,5 +623,25 @@ onMounted(() => {
 .v-container {
   max-width: 100% !important;
   width: 100% !important;
+}
+
+.data-option-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.data-option-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.data-option-card.selected {
+  border-color: #1976d2;
+  background-color: rgba(25, 118, 210, 0.05);
+}
+
+.data-option-card.selected .v-icon {
+  color: #1976d2 !important;
 }
 </style> 
