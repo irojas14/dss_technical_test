@@ -57,10 +57,43 @@ import { RouterView } from 'vue-router'
   text-transform: none;
 }
 
+@media (max-width: 480px) {
+  .v-btn {
+    padding: 0 8px !important;
+    min-width: auto !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .v-btn {
+    padding: 0 4px !important;
+    min-width: auto !important;
+  }
+}
+
 .main-content {
   width: 100% !important;
   max-width: 100% !important;
   padding: 0 !important;
+}
+
+.v-container {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+@media (max-width: 480px) {
+  .v-container {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .v-container {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -72,6 +105,12 @@ import { RouterView } from 'vue-router'
 @media (max-width: 480px) {
   .app-title {
     font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .app-title {
+    font-size: 0.875rem !important;
   }
 }
 </style>

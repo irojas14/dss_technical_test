@@ -337,10 +337,15 @@
   
   .about-header-card .v-card-title {
     font-size: 1.75rem !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
   }
   
   .about-header-card .v-card-subtitle {
     font-size: 1rem !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
   }
   
   .tech-item, .feature-item {
@@ -373,11 +378,16 @@
   .about-header-card .v-card-title {
     font-size: 1.5rem !important;
     padding: 16px !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
   }
   
   .about-header-card .v-card-subtitle {
     font-size: 0.875rem !important;
     padding: 0 16px 16px 16px !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
   }
   
   .tech-item, .feature-item {
@@ -398,6 +408,17 @@
   
   .feature-highlight .text-body-1 {
     font-size: 0.875rem !important;
+  }
+  
+  .about-header-card .v-card-title {
+    font-size: 1.25rem !important;
+    padding: 12px !important;
+    line-height: 1.1 !important;
+  }
+  
+  .about-header-card .v-card-subtitle {
+    font-size: 0.75rem !important;
+    padding: 0 12px 12px 12px !important;
   }
 }
 </style>
