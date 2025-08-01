@@ -66,7 +66,7 @@
           <v-btn 
             color="primary" 
             @click="confirmDataSelection"
-            :disabled="selectedDataOption === 'upload' && !uploadedFile"
+            :disabled="!canContinue"
           >
             Continuar
           </v-btn>
@@ -437,6 +437,13 @@ const processingTimeChartData = computed(() => {
       borderWidth: 2
     }))
   }
+})
+
+const canContinue = computed(() => {
+  if (!selectedDataOption.value) return false
+  if (selectedDataOption.value === 'default') return true
+  if (selectedDataOption.value === 'upload') return uploadedFile.value !== null
+  return false
 })
 
 const fileRules = (value: File | null) => {
