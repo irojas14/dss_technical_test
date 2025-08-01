@@ -1,6 +1,5 @@
 <template>
   <v-main class="dashboard-background">
-    <!-- Header sin espacios laterales -->
     <v-card class="header-card" elevation="8">
       <v-card-title class="text-h3 text-center py-6">
         <v-icon size="48" class="mr-4" color="primary">mdi-chart-line</v-icon>
@@ -15,7 +14,6 @@
       <v-row>
         <v-col cols="12">
 
-          <!-- Selector de Dashboard -->
           <v-row>
             <v-col cols="12">
               <v-card class="mb-6 filter-card" elevation="4">
@@ -66,7 +64,6 @@
             </v-col>
           </v-row>
 
-          <!-- Dashboard 1: Proyectos ingresados vs aprobados por año -->
           <v-row v-if="selectedDashboard === 'all' || selectedDashboard === 'projects'">
             <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
@@ -84,7 +81,6 @@
             </v-col>
           </v-row>
 
-          <!-- Dashboard 2: Inversión por año y tipo de proyecto -->
           <v-row v-if="selectedDashboard === 'all' || selectedDashboard === 'investment'">
             <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
@@ -102,7 +98,6 @@
             </v-col>
           </v-row>
 
-          <!-- Dashboard 3: Tiempo de tramitación -->
           <v-row v-if="selectedDashboard === 'all' || selectedDashboard === 'processing'">
             <v-col cols="12">
               <v-card class="mb-6 chart-card" elevation="6">
@@ -120,7 +115,6 @@
             </v-col>
           </v-row>
 
-          <!-- Resumen de estadísticas -->
           <v-row>
             <v-col cols="12" md="3">
               <v-card class="stat-card" elevation="4">
@@ -171,7 +165,6 @@ import ProjectsChart from './charts/ProjectsChart.vue'
 import InvestmentChart from './charts/InvestmentChart.vue'
 import ProcessingTimeChart from './charts/ProcessingTimeChart.vue'
 
-// Tipos
 interface Project {
   id: string
   nombre: string
@@ -183,13 +176,11 @@ interface Project {
   inversion: string
 }
 
-// Estado reactivo
 const projects = ref<Project[]>([])
 const selectedRegion = ref<string>('')
 const selectedYear = ref<string>('')
 const selectedDashboard = ref<string>('all')
 
-// Opciones de dashboard
 const dashboardOptions = [
   { title: 'Todos los Dashboards', value: 'all' },
   { title: 'Proyectos Ingresados vs Aprobados', value: 'projects' },
@@ -197,7 +188,6 @@ const dashboardOptions = [
   { title: 'Tiempo de Tramitación', value: 'processing' }
 ]
 
-// Datos filtrados
 const filteredProjects = computed(() => {
   let filtered = projects.value
 
@@ -207,7 +197,6 @@ const filteredProjects = computed(() => {
 
   if (selectedYear.value) {
     filtered = filtered.filter(project => {
-      // Manejar formato de fecha DD-MM-YYYY
       const fechaParts = project.fecha.split('-')
       const projectYear = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
       return projectYear === selectedYear.value
@@ -217,7 +206,6 @@ const filteredProjects = computed(() => {
   return filtered
 })
 
-// Opciones para filtros
 const regions = computed(() => {
   const uniqueRegions = [...new Set(projects.value.map(p => p.region))]
   return uniqueRegions.sort()
@@ -225,14 +213,12 @@ const regions = computed(() => {
 
 const years = computed(() => {
   const uniqueYears = [...new Set(projects.value.map(p => {
-    // Manejar formato de fecha DD-MM-YYYY
     const fechaParts = p.fecha.split('-')
     return fechaParts.length === 3 ? fechaParts[2] : new Date(p.fecha).getFullYear().toString()
   }))]
   return uniqueYears.sort()
 })
 
-// Estadísticas
 const totalProjects = computed(() => filteredProjects.value.length)
 
 const approvedProjects = computed(() => 
@@ -255,12 +241,10 @@ const averageProcessingTime = computed(() => {
   return Math.round(totalDays / projectsWithResolution.length)
 })
 
-// Dashboard 1: Proyectos ingresados vs aprobados por año
 const projectsChartData = computed(() => {
   const dataByYear: { [key: string]: { ingresados: number; aprobados: number } } = {}
 
   filteredProjects.value.forEach(project => {
-    // Agrupar por año de la propiedad fecha
     const fechaParts = project.fecha.split('-')
     const year = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
 
@@ -268,10 +252,8 @@ const projectsChartData = computed(() => {
       dataByYear[year] = { ingresados: 0, aprobados: 0 }
     }
 
-    // Contar proyectos por año
     dataByYear[year].ingresados++
 
-    // Contar cuántos están aprobados (estado = 'Aprobado')
     if (project.estado === 'Aprobado') {
       dataByYear[year].aprobados++
     }
@@ -300,17 +282,14 @@ const projectsChartData = computed(() => {
   }
 })
 
-// Dashboard 2: Inversión por año y tipo de proyecto
 const investmentChartData = computed(() => {
   const dataByYearAndType: { [key: string]: { [key: string]: number } } = {}
 
   filteredProjects.value.forEach(project => {
-    // Agrupar los proyectos por año y por tipo (DIA/EIA)
     const fechaParts = project.fecha.split('-')
     const year = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
     const tipo = project.tipo
     
-    // Sumar el campo inversión (asegurarse de parsearlo como número)
     const inversion = parseFloat(project.inversion.replace(/[^\d.-]/g, '')) || 0
 
     if (!dataByYearAndType[year]) {
@@ -339,20 +318,16 @@ const investmentChartData = computed(() => {
   }
 })
 
-// Dashboard 3: Diferencia de tiempo entre fecha y fecha_resolucion por año y tipo
 const processingTimeChartData = computed(() => {
   const dataByYearAndType: { [key: string]: { [key: string]: number[] } } = {}
 
   filteredProjects.value.forEach(project => {
-    // Solo procesar proyectos con fecha_resolucion no nula
     if (!project.fecha_resolucion) return
 
-    // Agrupar por año y tipo
     const fechaParts = project.fecha.split('-')
     const year = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
     const tipo = project.tipo
     
-    // Calcular los días entre ambas fechas (donde fecha_resolucion no sea nula)
     const fechaInicio = new Date(project.fecha.split('-').reverse().join('-'))
     const fechaResolucion = new Date(project.fecha_resolucion.split('-').reverse().join('-'))
     const diasDiferencia = Math.ceil((fechaResolucion.getTime() - fechaInicio.getTime()) / (1000 * 60 * 60 * 24))
@@ -386,23 +361,18 @@ const processingTimeChartData = computed(() => {
   }
 })
 
-// Métodos
 const filterData = () => {
-  // Los datos se actualizan automáticamente gracias a computed
 }
 
 const changeDashboard = () => {
-  // El dashboard se actualiza automáticamente gracias a v-if en el template
 }
 
 const loadData = async () => {
   try {
-    // Cargar el archivo JSON real
     const response = await fetch('/data/proyectos.json')
     projects.value = await response.json()
   } catch (error) {
     console.error('Error cargando datos:', error)
-    // Datos de ejemplo para desarrollo
     projects.value = []
   }
 }
@@ -494,7 +464,6 @@ onMounted(() => {
   margin-bottom: 8px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 16px !important;
@@ -509,7 +478,6 @@ onMounted(() => {
   }
 }
 
-/* Asegurar que el contenido use todo el ancho disponible */
 .v-main {
   width: 100% !important;
   max-width: 100% !important;

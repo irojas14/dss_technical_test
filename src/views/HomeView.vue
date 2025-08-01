@@ -6,7 +6,6 @@
     <v-container fluid class="pa-0">
       <v-row>
         <v-col cols="12">
-          <!-- Hero Section -->
           <v-row class="hero-section" align="center" justify="center">
             <v-col cols="12" md="8" class="text-center">
               <div class="hero-content">
@@ -32,7 +31,6 @@
             </v-col>
           </v-row>
 
-          <!-- Features Section -->
           <v-row class="features-section pa-12">
             <v-col cols="12" class="text-center mb-8">
               <h2 class="text-h3 font-weight-bold text-primary mb-4">
@@ -80,7 +78,6 @@
             </v-col>
           </v-row>
 
-          <!-- Stats Section -->
           <v-row class="stats-section pa-12">
             <v-col cols="12" class="text-center mb-8">
               <h2 class="text-h3 font-weight-bold text-white mb-4">
@@ -124,7 +121,6 @@
             </v-col>
           </v-row>
 
-          <!-- CTA Section -->
           <v-row class="cta-section pa-12">
             <v-col cols="12" class="text-center">
               <v-card class="cta-card" elevation="8">
@@ -228,7 +224,6 @@
   background: white;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-section {
     min-height: 60vh;

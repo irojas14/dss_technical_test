@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Componente About mejorado
 </script>
 
 <template>
@@ -7,7 +6,6 @@
     <v-container fluid class="pa-0">
       <v-row>
         <v-col cols="12">
-          <!-- Header Section -->
           <v-row>
             <v-col cols="12">
               <v-card class="mb-6 about-header-card" elevation="8">
@@ -22,7 +20,6 @@
             </v-col>
           </v-row>
 
-          <!-- Content Section -->
           <v-row>
             <v-col cols="12">
               <v-card class="mb-6 content-card" elevation="4">
@@ -95,7 +92,6 @@
             </v-col>
           </v-row>
 
-          <!-- Tech and Features Section -->
           <v-row>
             <v-col cols="12" md="6">
               <v-card class="mb-6 tech-card" elevation="4">
@@ -194,7 +190,6 @@
             </v-col>
           </v-row>
 
-          <!-- Footer Section -->
           <v-row>
             <v-col cols="12">
               <v-card class="footer-card" elevation="4">
@@ -327,7 +322,6 @@
   padding: 0 24px 24px 24px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .v-container {
     padding: 16px !important;
