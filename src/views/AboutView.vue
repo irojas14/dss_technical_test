@@ -334,5 +334,70 @@
   .features-grid {
     grid-template-columns: 1fr;
   }
+  
+  .about-header-card .v-card-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .about-header-card .v-card-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .tech-item, .feature-item {
+    padding: 0.5rem !important;
+  }
+  
+  .tech-item .text-body-1, .feature-item .text-body-1 {
+    font-size: 0.875rem !important;
+  }
+  
+  .tech-item .text-caption, .feature-item .text-caption {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .v-container {
+    padding: 8px !important;
+  }
+  
+  .v-card-title {
+    font-size: 1.25rem !important;
+    padding: 16px 16px 12px 16px !important;
+  }
+  
+  .v-card-text {
+    padding: 0 16px 16px 16px !important;
+  }
+  
+  .about-header-card .v-card-title {
+    font-size: 1.5rem !important;
+    padding: 16px !important;
+  }
+  
+  .about-header-card .v-card-subtitle {
+    font-size: 0.875rem !important;
+    padding: 0 16px 16px 16px !important;
+  }
+  
+  .tech-item, .feature-item {
+    padding: 0.375rem !important;
+  }
+  
+  .tech-item .text-body-1, .feature-item .text-body-1 {
+    font-size: 0.75rem !important;
+  }
+  
+  .tech-item .text-caption, .feature-item .text-caption {
+    font-size: 0.625rem !important;
+  }
+  
+  .feature-highlight {
+    padding: 0.5rem !important;
+  }
+  
+  .feature-highlight .text-body-1 {
+    font-size: 0.875rem !important;
+  }
 }
 </style>

@@ -50,10 +50,26 @@ const chartOptions = {
   plugins: {
     legend: {
       position: 'top' as const,
+      labels: {
+        boxWidth: 12,
+        padding: 15,
+        font: {
+          size: window.innerWidth < 768 ? 10 : 12
+        }
+      }
     },
     title: {
       display: true,
-      text: 'Proyectos Ingresados vs Aprobados por Año (Evolución Temporal)'
+      text: window.innerWidth < 480 ? 'Proyectos Ingresados vs Aprobados' : 
+            window.innerWidth < 768 ? 'Proyectos Ingresados vs Aprobados por Año' : 
+            'Proyectos Ingresados vs Aprobados por Año (Evolución Temporal)',
+      font: {
+        size: window.innerWidth < 480 ? 12 : window.innerWidth < 768 ? 14 : 16
+      },
+      padding: {
+        top: window.innerWidth < 480 ? 8 : 16,
+        bottom: window.innerWidth < 480 ? 8 : 16
+      }
     },
     tooltip: {
       callbacks: {
@@ -69,16 +85,30 @@ const chartOptions = {
       beginAtZero: true,
       title: {
         display: true,
-        text: 'Cantidad de Proyectos'
+        text: window.innerWidth < 480 ? 'Cantidad' : 'Cantidad de Proyectos',
+        font: {
+          size: window.innerWidth < 480 ? 9 : window.innerWidth < 768 ? 10 : 12
+        }
       },
       ticks: {
-        stepSize: 1
+        stepSize: 1,
+        font: {
+          size: window.innerWidth < 480 ? 9 : window.innerWidth < 768 ? 10 : 12
+        }
       }
     },
     x: {
       title: {
         display: true,
-        text: 'Año'
+        text: 'Año',
+        font: {
+          size: window.innerWidth < 480 ? 9 : window.innerWidth < 768 ? 10 : 12
+        }
+      },
+      ticks: {
+        font: {
+          size: window.innerWidth < 480 ? 9 : window.innerWidth < 768 ? 10 : 12
+        }
       }
     }
   }
@@ -94,5 +124,17 @@ const chartOptions = {
 
 .chart {
   height: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    height: 250px;
+  }
 }
 </style> 

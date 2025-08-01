@@ -21,11 +21,11 @@
                   color="white"
                   variant="elevated"
                   to="/dashboard"
-                  class="text-none px-8 py-4"
+                  class="text-none px-8 py-4 dashboard-btn"
                   elevation="8"
                 >
                   <v-icon class="mr-3">mdi-chart-line</v-icon>
-                  Explorar Dashboard
+                  <span class="btn-text">Explorar Dashboard</span>
                 </v-btn>
               </div>
             </v-col>
@@ -243,6 +243,110 @@
   
   .pa-12 {
     padding: 48px 16px !important;
+  }
+  
+  .hero-content .v-icon {
+    font-size: 80px !important;
+  }
+  
+  .feature-card .v-icon {
+    font-size: 48px !important;
+  }
+  
+  .stat-item .v-icon {
+    font-size: 36px !important;
+  }
+  
+  .dashboard-btn {
+    padding: 16px 24px !important;
+    font-size: 1rem !important;
+  }
+  
+  .dashboard-btn .v-icon {
+    font-size: 20px !important;
+    margin-right: 10px !important;
+  }
+  
+  .btn-text {
+    font-size: 1rem !important;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 50vh;
+  }
+  
+  .text-h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-h5 {
+    font-size: 1rem !important;
+  }
+  
+  .text-h6 {
+    font-size: 0.875rem !important;
+  }
+  
+  .pa-12 {
+    padding: 32px 12px !important;
+  }
+  
+  .hero-content .v-icon {
+    font-size: 60px !important;
+  }
+  
+  .feature-card .v-icon {
+    font-size: 36px !important;
+  }
+  
+  .stat-item .v-icon {
+    font-size: 24px !important;
+  }
+  
+  .stat-item .text-h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  .stat-item .text-subtitle-1 {
+    font-size: 0.75rem !important;
+  }
+  
+  .dashboard-btn {
+    padding: 12px 16px !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .dashboard-btn .v-icon {
+    font-size: 18px !important;
+    margin-right: 8px !important;
+  }
+  
+  .btn-text {
+    font-size: 0.875rem !important;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-btn {
+    padding: 8px 12px !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .dashboard-btn .v-icon {
+    font-size: 16px !important;
+    margin-right: 6px !important;
+  }
+  
+  .btn-text {
+    font-size: 0.75rem !important;
   }
 }
 

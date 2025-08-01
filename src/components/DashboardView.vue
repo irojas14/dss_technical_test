@@ -1,6 +1,6 @@
 <template>
   <v-main class="dashboard-background">
-    <v-dialog v-model="showDataSelection" persistent max-width="600">
+    <v-dialog v-model="showDataSelection" persistent max-width="600" width="95%">
       <v-card>
         <v-card-title class="d-flex align-center">
           <v-icon class="mr-3" color="primary">mdi-database</v-icon>
@@ -608,6 +608,12 @@ onMounted(() => {
   margin-bottom: 8px;
 }
 
+.text-body-2 {
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+}
+
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 16px !important;
@@ -619,6 +625,59 @@ onMounted(() => {
   
   .stat-card .v-card-text {
     padding: 16px !important;
+  }
+  
+  .header-card .v-card-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .header-card .v-card-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .v-icon {
+    font-size: 24px !important;
+  }
+  
+  .data-option-card .v-icon {
+    font-size: 36px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 8px !important;
+  }
+  
+  .v-card-title {
+    font-size: 1.25rem !important;
+    padding: 16px 16px 12px 16px !important;
+  }
+  
+  .v-card-text {
+    padding: 0 16px 16px 16px !important;
+  }
+  
+  .header-card .v-card-title {
+    font-size: 1.5rem !important;
+    padding: 16px !important;
+  }
+  
+  .header-card .v-card-subtitle {
+    font-size: 0.875rem !important;
+    padding: 0 16px 16px 16px !important;
+  }
+  
+  .stat-card .v-card-text {
+    padding: 12px !important;
+  }
+  
+  .stat-card .text-h4 {
+    font-size: 1.5rem !important;
+  }
+  
+  .stat-card .text-subtitle-1 {
+    font-size: 0.75rem !important;
   }
 }
 
@@ -650,5 +709,102 @@ onMounted(() => {
 
 .data-option-card.selected .v-icon {
   color: #1976d2 !important;
+}
+
+@media (max-width: 768px) {
+  .data-option-card .v-card-text {
+    padding: 16px !important;
+  }
+  
+  .data-option-card .text-h6 {
+    font-size: 1rem !important;
+  }
+  
+  .data-option-card .text-body-2 {
+    font-size: 0.875rem !important;
+  }
+  
+  .chart-card .v-card-title {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+  }
+  
+  .chart-card .v-card-subtitle {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  .text-body-2 {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .data-option-card .v-card-text {
+    padding: 12px !important;
+  }
+  
+  .data-option-card .text-h6 {
+    font-size: 0.875rem !important;
+  }
+  
+  .data-option-card .text-body-2 {
+    font-size: 0.75rem !important;
+  }
+  
+  .data-option-card .v-icon {
+    font-size: 32px !important;
+  }
+  
+  .chart-card .v-card-title {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    padding: 12px 12px 8px 12px !important;
+  }
+  
+  .chart-card .v-card-subtitle {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+    padding: 0 12px 8px 12px !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  .text-body-2 {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .chart-card .v-card-title {
+    font-size: 0.875rem !important;
+    padding: 10px 10px 6px 10px !important;
+  }
+  
+  .chart-card .v-card-subtitle {
+    font-size: 0.7rem !important;
+    padding: 0 10px 6px 10px !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    line-height: 1.2 !important;
+  }
+  
+  .text-body-2 {
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+  }
 }
 </style> 
