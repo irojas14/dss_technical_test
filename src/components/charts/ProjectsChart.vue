@@ -53,7 +53,15 @@ const chartOptions = {
     },
     title: {
       display: true,
-      text: 'Proyectos Ingresados vs Aprobados por Año'
+      text: 'Proyectos Ingresados vs Aprobados por Año (Evolución Temporal)'
+    },
+    tooltip: {
+      callbacks: {
+        label: function(context: any) {
+          const value = context.parsed.y
+          return `${context.dataset.label}: ${value} proyectos`
+        }
+      }
     }
   },
   scales: {
@@ -62,6 +70,9 @@ const chartOptions = {
       title: {
         display: true,
         text: 'Cantidad de Proyectos'
+      },
+      ticks: {
+        stepSize: 1
       }
     },
     x: {

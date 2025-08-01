@@ -110,7 +110,7 @@
             <v-col cols="12" md="3" class="text-center">
               <div class="stat-item">
                 <v-icon size="48" color="white" class="mb-3">mdi-calendar-range</v-icon>
-                <div class="text-h3 font-weight-bold text-white mb-2">2020-2024</div>
+                <div class="text-h3 font-weight-bold text-white mb-2">2020-2025</div>
                 <div class="text-subtitle-1 text-white">Período de Análisis</div>
               </div>
             </v-col>

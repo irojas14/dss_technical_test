@@ -63,6 +63,9 @@
                   <v-icon class="mr-3" color="info">mdi-chart-bar</v-icon>
                   Proyectos Ingresados vs Aprobados por Año
                 </v-card-title>
+                <v-card-subtitle class="text-body-2">
+                  Análisis de la evolución temporal de proyectos ambientales, mostrando la cantidad de proyectos ingresados y aprobados por año
+                </v-card-subtitle>
                 <v-card-text class="pt-4">
                   <ProjectsChart :chart-data="projectsChartData" />
                 </v-card-text>
@@ -78,6 +81,9 @@
                   <v-icon class="mr-3" color="success">mdi-currency-usd</v-icon>
                   Inversión por Año y Tipo de Proyecto
                 </v-card-title>
+                <v-card-subtitle class="text-body-2">
+                  Análisis de inversiones agrupadas por año y tipo de proyecto (DIA/EIA), mostrando la distribución de recursos financieros
+                </v-card-subtitle>
                 <v-card-text class="pt-4">
                   <InvestmentChart :chart-data="investmentChartData" />
                 </v-card-text>
@@ -91,8 +97,11 @@
               <v-card class="mb-6 chart-card" elevation="6">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="warning">mdi-clock-outline</v-icon>
-                Tiempo de Tramitación por Año y Tipo
+                  Tiempo de Tramitación por Año y Tipo
                 </v-card-title>
+                <v-card-subtitle class="text-body-2">
+                  Análisis de eficiencia en tiempos de tramitación, calculando la diferencia entre fecha de ingreso y fecha de resolución
+                </v-card-subtitle>
                 <v-card-text class="pt-4">
                   <ProcessingTimeChart :chart-data="processingTimeChartData" />
                 </v-card-text>
@@ -226,12 +235,12 @@ const averageProcessingTime = computed(() => {
   return Math.round(totalDays / projectsWithResolution.length)
 })
 
-// Datos para gráficos
+// Dashboard 1: Proyectos ingresados vs aprobados por año
 const projectsChartData = computed(() => {
   const dataByYear: { [key: string]: { ingresados: number; aprobados: number } } = {}
 
   filteredProjects.value.forEach(project => {
-    // Manejar formato de fecha DD-MM-YYYY
+    // Agrupar por año de la propiedad fecha
     const fechaParts = project.fecha.split('-')
     const year = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
 
@@ -239,8 +248,10 @@ const projectsChartData = computed(() => {
       dataByYear[year] = { ingresados: 0, aprobados: 0 }
     }
 
+    // Contar proyectos por año
     dataByYear[year].ingresados++
 
+    // Contar cuántos están aprobados (estado = 'Aprobado')
     if (project.estado === 'Aprobado') {
       dataByYear[year].aprobados++
     }
@@ -254,30 +265,32 @@ const projectsChartData = computed(() => {
       {
         label: 'Proyectos Ingresados',
         data: years.map(year => dataByYear[year].ingresados),
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        backgroundColor: 'rgba(54, 162, 235, 0.7)',
         borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
+        borderWidth: 2
       },
       {
         label: 'Proyectos Aprobados',
         data: years.map(year => dataByYear[year].aprobados),
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        backgroundColor: 'rgba(75, 192, 192, 0.7)',
         borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
+        borderWidth: 2
       }
     ]
   }
 })
 
+// Dashboard 2: Inversión por año y tipo de proyecto
 const investmentChartData = computed(() => {
   const dataByYearAndType: { [key: string]: { [key: string]: number } } = {}
 
   filteredProjects.value.forEach(project => {
-    // Manejar formato de fecha DD-MM-YYYY
+    // Agrupar los proyectos por año y por tipo (DIA/EIA)
     const fechaParts = project.fecha.split('-')
     const year = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
     const tipo = project.tipo
-    // Manejar formato de inversión con comas (ej: "100,0000")
+    
+    // Sumar el campo inversión (asegurarse de parsearlo como número)
     const inversion = parseFloat(project.inversion.replace(/[^\d.-]/g, '')) || 0
 
     if (!dataByYearAndType[year]) {
@@ -299,25 +312,27 @@ const investmentChartData = computed(() => {
     datasets: tipos.map(tipo => ({
       label: tipo,
       data: years.map(year => dataByYearAndType[year][tipo] || 0),
-      backgroundColor: tipo === 'DIA' ? 'rgba(255, 99, 132, 0.5)' : 'rgba(255, 205, 86, 0.5)',
+      backgroundColor: tipo === 'DIA' ? 'rgba(255, 99, 132, 0.7)' : 'rgba(255, 205, 86, 0.7)',
       borderColor: tipo === 'DIA' ? 'rgba(255, 99, 132, 1)' : 'rgba(255, 205, 86, 1)',
-      borderWidth: 1
+      borderWidth: 2
     }))
   }
 })
 
+// Dashboard 3: Diferencia de tiempo entre fecha y fecha_resolucion por año y tipo
 const processingTimeChartData = computed(() => {
   const dataByYearAndType: { [key: string]: { [key: string]: number[] } } = {}
 
   filteredProjects.value.forEach(project => {
+    // Solo procesar proyectos con fecha_resolucion no nula
     if (!project.fecha_resolucion) return
 
-    // Manejar formato de fecha DD-MM-YYYY
+    // Agrupar por año y tipo
     const fechaParts = project.fecha.split('-')
     const year = fechaParts.length === 3 ? fechaParts[2] : new Date(project.fecha).getFullYear().toString()
     const tipo = project.tipo
     
-    // Convertir fechas al formato correcto para Date()
+    // Calcular los días entre ambas fechas (donde fecha_resolucion no sea nula)
     const fechaInicio = new Date(project.fecha.split('-').reverse().join('-'))
     const fechaResolucion = new Date(project.fecha_resolucion.split('-').reverse().join('-'))
     const diasDiferencia = Math.ceil((fechaResolucion.getTime() - fechaInicio.getTime()) / (1000 * 60 * 60 * 24))
@@ -344,9 +359,9 @@ const processingTimeChartData = computed(() => {
         const tiempos = dataByYearAndType[year]?.[tipo] || []
         return tiempos.length > 0 ? tiempos.reduce((a, b) => a + b, 0) / tiempos.length : 0
       }),
-      backgroundColor: tipo === 'DIA' ? 'rgba(153, 102, 255, 0.5)' : 'rgba(255, 159, 64, 0.5)',
+      backgroundColor: tipo === 'DIA' ? 'rgba(153, 102, 255, 0.7)' : 'rgba(255, 159, 64, 0.7)',
       borderColor: tipo === 'DIA' ? 'rgba(153, 102, 255, 1)' : 'rgba(255, 159, 64, 1)',
-      borderWidth: 1
+      borderWidth: 2
     }))
   }
 })

@@ -53,7 +53,7 @@ const chartOptions = {
     },
     title: {
       display: true,
-      text: 'Inversión por Año y Tipo de Proyecto'
+      text: 'Inversión por Año y Tipo de Proyecto (Stacked Bar Chart)'
     },
     tooltip: {
       callbacks: {
@@ -67,6 +67,7 @@ const chartOptions = {
   scales: {
     y: {
       beginAtZero: true,
+      stacked: true,
       title: {
         display: true,
         text: 'Inversión (USD)'
@@ -78,6 +79,7 @@ const chartOptions = {
       }
     },
     x: {
+      stacked: true,
       title: {
         display: true,
         text: 'Año'

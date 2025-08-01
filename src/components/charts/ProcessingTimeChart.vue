@@ -55,7 +55,7 @@ const chartOptions = {
     },
     title: {
       display: true,
-      text: 'Tiempo Promedio de Tramitación por Año y Tipo'
+      text: 'Tiempo Promedio de Tramitación por Año y Tipo (Diferencia de Fechas)'
     },
     tooltip: {
       callbacks: {
@@ -71,7 +71,7 @@ const chartOptions = {
       beginAtZero: true,
       title: {
         display: true,
-        text: 'Días Promedio'
+        text: 'Días Promedio de Tramitación'
       },
       ticks: {
         callback: function(value: any) {
