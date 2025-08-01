@@ -24,87 +24,170 @@
 
           <!-- Content Section -->
           <v-row>
-            <v-col cols="12" md="8">
+            <v-col cols="12">
               <v-card class="mb-6 content-card" elevation="4">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="primary">mdi-file-document</v-icon>
                   Descripción del Proyecto
                 </v-card-title>
                 <v-card-text class="pt-4">
-                  <p class="text-body-1 mb-4">
-                    Esta plataforma fue desarrollada como parte de una prueba técnica para demostrar habilidades en el desarrollo de aplicaciones web modernas utilizando Vue 3 y Vuetify 3.
-                  </p>
-                  <p class="text-body-1 mb-4">
-                    El objetivo principal es proporcionar una interfaz intuitiva y funcional para analizar y visualizar datos de proyectos ambientales en Chile, permitiendo a los usuarios explorar diferentes aspectos como:
-                  </p>
-                  <ul class="text-body-1 mb-4">
-                    <li>Evolución temporal de proyectos ingresados vs aprobados</li>
-                    <li>Análisis de inversiones por tipo de proyecto (DIA/EIA)</li>
-                    <li>Tiempos promedio de tramitación</li>
-                    <li>Filtrado por región y período temporal</li>
-                  </ul>
-                  <p class="text-body-1">
-                    La aplicación utiliza tecnologías modernas como Chart.js para la visualización de datos, proporcionando gráficos interactivos y responsivos que se adaptan a diferentes dispositivos.
-                  </p>
+                  <div class="project-description">
+                    <div class="description-section mb-6">
+                      <h4 class="text-h6 font-weight-bold text-primary mb-3">
+                        <v-icon class="mr-2" color="primary">mdi-target</v-icon>
+                        Propósito
+                      </h4>
+                      <p class="text-body-1 mb-4">
+                        Esta plataforma fue desarrollada como parte de una prueba técnica para demostrar habilidades en el desarrollo de aplicaciones web modernas utilizando <strong>Vue 3</strong> y <strong>Vuetify 3</strong>.
+                      </p>
+                    </div>
+
+                    <div class="description-section mb-6">
+                      <h4 class="text-h6 font-weight-bold text-primary mb-3">
+                        <v-icon class="mr-2" color="primary">mdi-chart-line</v-icon>
+                        Objetivo Principal
+                      </h4>
+                      <p class="text-body-1 mb-4">
+                        Proporcionar una interfaz intuitiva y funcional para analizar y visualizar datos de proyectos ambientales en Chile, permitiendo a los usuarios explorar diferentes aspectos como:
+                      </p>
+                      <div class="features-grid">
+                        <div class="feature-highlight mb-3">
+                          <v-icon color="success" class="mr-2">mdi-trending-up</v-icon>
+                          <span class="text-body-1">Evolución temporal de proyectos</span>
+                        </div>
+                        <div class="feature-highlight mb-3">
+                          <v-icon color="info" class="mr-2">mdi-currency-usd</v-icon>
+                          <span class="text-body-1">Análisis de inversiones</span>
+                        </div>
+                        <div class="feature-highlight mb-3">
+                          <v-icon color="warning" class="mr-2">mdi-clock-outline</v-icon>
+                          <span class="text-body-1">Tiempos de tramitación</span>
+                        </div>
+                        <div class="feature-highlight mb-3">
+                          <v-icon color="primary" class="mr-2">mdi-filter-variant</v-icon>
+                          <span class="text-body-1">Filtrado por región</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="description-section mb-6">
+                      <h4 class="text-h6 font-weight-bold text-primary mb-3">
+                        <v-icon class="mr-2" color="primary">mdi-chart-bar</v-icon>
+                        Visualización de Datos
+                      </h4>
+                      <p class="text-body-1 mb-4">
+                        La aplicación utiliza <strong>Chart.js</strong> para la visualización de datos, proporcionando gráficos interactivos y responsivos que se adaptan a diferentes dispositivos y ofrecen una experiencia de usuario excepcional.
+                      </p>
+                    </div>
+
+                    <div class="description-section">
+                      <h4 class="text-h6 font-weight-bold text-primary mb-3">
+                        <v-icon class="mr-2" color="primary">mdi-lightbulb</v-icon>
+                        Beneficios de la Plataforma
+                      </h4>
+                      <p class="text-body-1">
+                        Esta herramienta facilita la toma de decisiones informadas en materia ambiental, proporcionando insights valiosos sobre la evolución de proyectos, patrones de inversión y eficiencia en los procesos de tramitación ambiental en Chile.
+                      </p>
+                    </div>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Tech and Features Section -->
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-card class="mb-6 tech-card" elevation="4">
+                <v-card-title class="d-flex align-center">
+                  <v-icon class="mr-3" color="success">mdi-cog</v-icon>
+                  Stack Tecnológico
+                </v-card-title>
+                <v-card-text class="pt-4">
+                  <div class="tech-grid">
+                    <div class="tech-item">
+                      <v-icon color="primary" class="mr-2">mdi-vuejs</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Vue 3</div>
+                        <div class="text-caption text-grey">Composition API</div>
+                      </div>
+                    </div>
+                    <div class="tech-item">
+                      <v-icon color="primary" class="mr-2">mdi-palette</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Vuetify 3</div>
+                        <div class="text-caption text-grey">UI Framework</div>
+                      </div>
+                    </div>
+                    <div class="tech-item">
+                      <v-icon color="primary" class="mr-2">mdi-chart-line</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Chart.js</div>
+                        <div class="text-caption text-grey">Visualización</div>
+                      </div>
+                    </div>
+                    <div class="tech-item">
+                      <v-icon color="primary" class="mr-2">mdi-language-typescript</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">TypeScript</div>
+                        <div class="text-caption text-grey">Tipado Estático</div>
+                      </div>
+                    </div>
+                    <div class="tech-item">
+                      <v-icon color="primary" class="mr-2">mdi-router</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Vue Router</div>
+                        <div class="text-caption text-grey">Navegación SPA</div>
+                      </div>
+                    </div>
+                  </div>
                 </v-card-text>
               </v-card>
             </v-col>
 
-            <v-col cols="12" md="4">
-              <v-card class="mb-6 tech-card" elevation="4">
-                <v-card-title class="d-flex align-center">
-                  <v-icon class="mr-3" color="success">mdi-cog</v-icon>
-                  Tecnologías Utilizadas
-                </v-card-title>
-                <v-card-text class="pt-4">
-                  <div class="tech-item mb-3">
-                    <v-icon color="primary" class="mr-2">mdi-vuejs</v-icon>
-                    <span class="text-body-1">Vue 3 (Composition API)</span>
-                  </div>
-                  <div class="tech-item mb-3">
-                    <v-icon color="primary" class="mr-2">mdi-palette</v-icon>
-                    <span class="text-body-1">Vuetify 3</span>
-                  </div>
-                  <div class="tech-item mb-3">
-                    <v-icon color="primary" class="mr-2">mdi-chart-line</v-icon>
-                    <span class="text-body-1">Chart.js</span>
-                  </div>
-                  <div class="tech-item mb-3">
-                    <v-icon color="primary" class="mr-2">mdi-language-typescript</v-icon>
-                    <span class="text-body-1">TypeScript</span>
-                  </div>
-                  <div class="tech-item mb-3">
-                    <v-icon color="primary" class="mr-2">mdi-router</v-icon>
-                    <span class="text-body-1">Vue Router</span>
-                  </div>
-                </v-card-text>
-              </v-card>
-
+            <v-col cols="12" md="6">
               <v-card class="mb-6 features-card" elevation="4">
                 <v-card-title class="d-flex align-center">
                   <v-icon class="mr-3" color="info">mdi-star</v-icon>
-                  Características
+                  Características Principales
                 </v-card-title>
                 <v-card-text class="pt-4">
-                  <div class="feature-item mb-3">
-                    <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
-                    <span class="text-body-1">Diseño Responsivo</span>
-                  </div>
-                  <div class="feature-item mb-3">
-                    <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
-                    <span class="text-body-1">Filtros Dinámicos</span>
-                  </div>
-                  <div class="feature-item mb-3">
-                    <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
-                    <span class="text-body-1">Gráficos Interactivos</span>
-                  </div>
-                  <div class="feature-item mb-3">
-                    <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
-                    <span class="text-body-1">Carga de Datos JSON</span>
-                  </div>
-                  <div class="feature-item mb-3">
-                    <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
-                    <span class="text-body-1">Navegación SPA</span>
+                  <div class="features-list">
+                    <div class="feature-item">
+                      <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Diseño Responsivo</div>
+                        <div class="text-caption text-grey">Adaptable a todos los dispositivos</div>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Filtros Dinámicos</div>
+                        <div class="text-caption text-grey">Búsqueda avanzada de datos</div>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Gráficos Interactivos</div>
+                        <div class="text-caption text-grey">Visualización dinámica</div>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Carga de Datos JSON</div>
+                        <div class="text-caption text-grey">Integración con APIs</div>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
+                      <div>
+                        <div class="text-body-1 font-weight-bold">Navegación SPA</div>
+                        <div class="text-caption text-grey">Experiencia fluida</div>
+                      </div>
+                    </div>
                   </div>
                 </v-card-text>
               </v-card>
@@ -178,10 +261,54 @@
   border-left: 4px solid #ff9800;
 }
 
-.tech-item, .feature-item {
+.description-section {
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feature-highlight {
   display: flex;
   align-items: center;
-  padding: 8px 0;
+  padding: 0.75rem;
+  background: rgba(25, 118, 210, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #1976d2;
+}
+
+.tech-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(76, 175, 80, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #4caf50;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  background: rgba(33, 150, 243, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #2196f3;
 }
 
 .v-card {
@@ -208,6 +335,10 @@
   
   .v-card-title {
     font-size: 1.5rem !important;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
